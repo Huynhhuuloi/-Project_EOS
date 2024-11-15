@@ -1,0 +1,250 @@
+﻿
+@{
+    ViewBag.Title = "Employee";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    List<Project_EOS.Models.Entities.Employee> nv = new List<Project_EOS.Models.Entities.Employee>();
+    if (ViewBag.employee != null) { nv = ViewBag.employee; }
+}
+
+<h2>Client</h2>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <style type='text/css'>
+        #numbered-table {
+            counter-reset: rowNumber; /* Reset counter for each table */
+        }
+
+            #numbered-table tbody tr {
+                counter-increment: rowNumber; /* Increment counter for each row */
+            }
+
+                #numbered-table tbody tr td:first-child::before {
+                    content: counter(rowNumber); /* Display row number */
+                    min-width: 1em; /* Ensure space for at least one digit */
+                    margin-right: 0.5em; /* Add some spacing between number and content */
+                }
+    </style>
+</head>
+<body>
+    <div>
+
+        <table class="table table-striped" width="700" border="1" id="numbered-table">
+            <thead>
+                <tr>
+                    <th>stt</th>
+                    <th>Name</th>
+                    <th>DeparmentID</th>
+                    <th>Designation</th>
+                    <th>ServiceID</th>
+                    <th>Salary</th>
+                    <th>Email</th>
+                    <th>Joindate</th>
+                    <th>Is_Active</th>
+                    <th>UserName</th>
+                    <th>Password</th>                  
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Project_EOS.Models.Entities.Employee item in nv)
+                {
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ShowEmployeeDetail", new { id = item.EmployeeID })">@item.EmployeeName</a>
+                        </td>
+
+                        <td>
+                            @item.DepartmentID
+                        </td>
+                        <td>
+                            @item.Designation
+                        </td>
+                        <td>
+                            @item.ServiceID
+                        </td>
+                        <td>
+                            @item.Salary
+                        </td>
+                        <td>
+                            @item.Email
+                        </td>
+                        <td>
+                            @item.JoinDate
+                        </td>
+                        <td>
+                            @item.Is_Active
+                        </td>
+                        <td>
+                            @item.Username
+                        </td>
+                        <td>
+                            @item.Password
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6">
+        <div class="mdc-card p-0">
+            <h6 class="card-title card-padding pb-0"></h6>
+            <div class="table-responsive">
+                <form action="@Url.Action("AddEmployee")" method="post" enctype="multipart/form-data">
+                    <div class="mdc-layout-grid">
+                        <div class="mdc-layout-grid__inner">
+                            <div class="mdc-layout-grid__cell--span-12">
+                                <div class="mdc-card">
+                                    <h6 class="card-title">Add Product</h6>
+                                    <div class="template-demo">
+                                        <div class="mdc-layout-grid__inner">
+                                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                                <div class="mdc-text-field mdc-text-field--outlined">
+                                                    <input class="mdc-text-field__input" id="EmployeeName" name="EmployeeName">
+                                                    <div class="mdc-notched-outline">
+                                                        <div class="mdc-notched-outline__leading"></div>
+                                                        <div class="mdc-notched-outline__notch">
+                                                            <labe for="text-field-hero-input" class="mdc-floating-label">Employee Name</labe>
+                                                        </div>
+                                                        <div class="mdc-notched-outline__trailing"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                                <div class="mdc-text-field mdc-text-field--outlined">
+                                                    <input class="mdc-text-field__input" id="DepartmentID " name="DepartmentID">
+                                                    <div class="mdc-notched-outline">
+                                                        <div class="mdc-notched-outline__leading"></div>
+                                                        <div class="mdc-notched-outline__notch">
+                                                            <labe for="text-field-hero-input" class="mdc-floating-label">DepartmentID</labe>
+                                                        </div>
+                                                        <div class="mdc-notched-outline__trailing"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                                <div class="mdc-text-field mdc-text-field--outlined">
+                                                    <input class="mdc-text-field__input" id="Designation" name="Designation">
+                                                    <div class="mdc-notched-outline">
+                                                        <div class="mdc-notched-outline__leading"></div>
+                                                        <div class="mdc-notched-outline__notch">
+                                                            <labe for="text-field-hero-input" class="mdc-floating-label">Designation</labe>
+                                                        </div>
+                                                        <div class="mdc-notched-outline__trailing"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                                <div class="mdc-text-field mdc-text-field--outlined">
+                                                    <input class="mdc-text-field__input" id="ServiceID" name="ServiceID">
+                                                    <div class="mdc-notched-outline">
+                                                        <div class="mdc-notched-outline__leading"></div>
+                                                        <div class="mdc-notched-outline__notch">
+                                                            <labe for="text-field-hero-input" class="mdc-floating-label">ServiceID</labe>
+                                                        </div>
+                                                        <div class="mdc-notched-outline__trailing"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                                <div class="mdc-text-field mdc-text-field--outlined">
+                                                    <input class="mdc-text-field__input" id="Salary" name="Salary">
+                                                    <div class="mdc-notched-outline">
+                                                        <div class="mdc-notched-outline__leading"></div>
+                                                        <div class="mdc-notched-outline__notch">
+                                                            <labe for="text-field-hero-input" class="mdc-floating-label">Salary</labe>
+                                                        </div>
+                                                        <div class="mdc-notched-outline__trailing"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                                <div class="mdc-text-field mdc-text-field--outlined">
+                                                    <input class="mdc-text-field__input" id="Email" name="Email">
+                                                    <div class="mdc-notched-outline">
+                                                        <div class="mdc-notched-outline__leading"></div>
+                                                        <div class="mdc-notched-outline__notch">
+                                                            <labe for="text-field-hero-input" class="mdc-floating-label">Email</labe>
+                                                        </div>
+                                                        <div class="mdc-notched-outline__trailing"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                                <div class="mdc-text-field mdc-text-field--outlined">
+                                                    <input class="mdc-text-field__input" id="JoinDate" name="JoinDate">
+                                                    <div class="mdc-notched-outline">
+                                                        <div class="mdc-notched-outline__leading"></div>
+                                                        <div class="mdc-notched-outline__notch">
+                                                            <labe for="text-field-hero-input" class="mdc-floating-label">JoinDate</labe>
+                                                        </div>
+                                                        <div class="mdc-notched-outline__trailing"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                                <div class="mdc-text-field mdc-text-field--outlined">
+                                                    <input class="mdc-text-field__input" id="Is_Active" name="Is_Active">
+                                                    <div class="mdc-notched-outline">
+                                                        <div class="mdc-notched-outline__leading"></div>
+                                                        <div class="mdc-notched-outline__notch">
+                                                            <labe for="text-field-hero-input" class="mdc-floating-label">Is_Active</labe>
+                                                        </div>
+                                                        <div class="mdc-notched-outline__trailing"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                                <div class="mdc-text-field mdc-text-field--outlined">
+                                                    <input class="mdc-text-field__input" id="UserName" name="UserName">
+                                                    <div class="mdc-notched-outline">
+                                                        <div class="mdc-notched-outline__leading"></div>
+                                                        <div class="mdc-notched-outline__notch">
+                                                            <labe for="text-field-hero-input" class="mdc-floating-label">UserName</labe>
+                                                        </div>
+                                                        <div class="mdc-notched-outline__trailing"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                                <div class="mdc-text-field mdc-text-field--outlined">
+                                                    <input class="mdc-text-field__input" id="Password" name="Password">
+                                                    <div class="mdc-notched-outline">
+                                                        <div class="mdc-notched-outline__leading"></div>
+                                                        <div class="mdc-notched-outline__notch">
+                                                            <labe for="text-field-hero-input" class="mdc-floating-label">Password</labe>
+                                                        </div>
+                                                        <div class="mdc-notched-outline__trailing"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mdc-layout-grid__inner">
+                                            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
+                                                <div class="mdc-text-field mdc-text-field--outlined">
+                                                    <button class="mdc-text-field mdc-text-field--outlined">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

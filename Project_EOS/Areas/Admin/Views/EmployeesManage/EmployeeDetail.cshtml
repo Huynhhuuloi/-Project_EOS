@@ -1,0 +1,76 @@
+﻿@model Project_EOS.Models.Dao.EmployeeViewModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Employee Detail";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Employee Detail</title>
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/Content/style.css" />
+</head>
+<body>
+
+    <div>
+        <h2>@Model.EmployeeName works in the @Model.DepartmentName department, providing @Model.ServiceName services</h2>
+    </div>
+
+    <table class="table table-striped" id="numbered-table">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th class="name-column">Name</th>
+                <th>Department</th>
+                <th>Service</th>
+                <th>Designation</th>
+                <th>Email</th>
+                <th>Salary</th>
+                <th>Join Date</th>
+                <th>Active</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>@Model.EmployeeName</td>
+                <td>
+                    <select id="editDepartment" disabled>
+                        @foreach (var department in ViewBag.Departments as SelectList)
+                        {
+                            <option value="@department.Value" @(department.Value == Model.DepartmentID.ToString() ? "selected" : "")>@department.Text</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <select id="editService" disabled>
+                        @foreach (var service in ViewBag.Services as SelectList)
+                        {
+                            <option value="@service.Value" @(service.Value == Model.ServiceID.ToString() ? "selected" : "")>@service.Text</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="editDesignation" value="@Model.Designation" placeholder="@Model.Designation" disabled>
+                </td>
+                <td>@Model.Email</td>
+                <td>
+                    <input type="text" id="editSalary" value="@Model.Salary.ToString("C")" placeholder="@Model.Salary.ToString("C")" disabled>
+                </td>
+                <td>@Model.JoinDate.ToString("yyyy-MM-dd")</td>
+                <td class="custom-checkbox">
+                    <input type="checkbox" @(Model.Is_Active.HasValue && Model.Is_Active.Value ? "checked" : "") disabled>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button id="editButton" data-employee-id="@Model.EmployeeID">Edit</button>
+    <button id="saveEditBtn" style="display: none;" data-employee-id="@Model.EmployeeID">Save</button>
+    <button id="cancelEditBtn" style="display: none;">Cancel</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/Areas/Admin/Scipts/Employee.js"></script>
+
+</body>
+</html>

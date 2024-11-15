@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Excell_On_ServiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CallLog">
+    <Key>
+      <PropertyRef Name="CallLogID" />
+    </Key>
+    <Property Name="CallLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="ClientID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceID" Type="Int32" Nullable="false" />
+    <Property Name="CallDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CallType" Type="String" MaxLength="55" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoriesID" />
+    </Key>
+    <Property Name="CategoriesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoriesName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Products__Catego__48CFD27E" FromRole="Categories" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ClientID" />
+    </Key>
+    <Property Name="ClientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ContactPerson" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ClientServices" Relationship="Self.FK__ClientSer__Clien__4316F928" FromRole="Clients" ToRole="ClientServices" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Order__ClientID__5165187F" FromRole="Clients" ToRole="Order" />
+    <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__Client__4BAC3F29" FromRole="Clients" ToRole="Payments" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Products__Client__47DBAE45" FromRole="Clients" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="ClientService">
+    <Key>
+      <PropertyRef Name="ClientServiceID" />
+    </Key>
+    <Property Name="ClientServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientID" Type="Int32" />
+    <Property Name="ServiceID" Type="Int32" />
+    <Property Name="ServiceStartDate" Type="DateTime" Precision="0" />
+    <Property Name="ServiceEndDate" Type="DateTime" Precision="0" />
+    <Property Name="EmployeeID" Type="Int32" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__ClientSer__Clien__4316F928" FromRole="ClientServices" ToRole="Clients" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__ClientSer__Emplo__44FF419A" FromRole="ClientServices" ToRole="Employees" />
+    <NavigationProperty Name="Service" Relationship="Self.FK__ClientSer__Servi__440B1D61" FromRole="ClientServices" ToRole="Services" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DepartmentDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__Depar__3D5E1FD2" FromRole="Departments" ToRole="Employees" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+    <Property Name="Designation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ServiceID" Type="Int32" Nullable="false" />
+    <Property Name="Salary" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Is_Active" Type="Boolean" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ClientServices" Relationship="Self.FK__ClientSer__Emplo__44FF419A" FromRole="Employees" ToRole="ClientServices" />
+    <NavigationProperty Name="Department" Relationship="Self.FK__Employees__Depar__3D5E1FD2" FromRole="Employees" ToRole="Departments" />
+    <NavigationProperty Name="Service" Relationship="Self.FK__Employees__Servi__3E52440B" FromRole="Employees" ToRole="Services" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientID" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="ServiceID" Type="Int32" />
+    <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="PaymentID" Type="Int32" />
+    <Property Name="DateOrder" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Order__ClientID__5165187F" FromRole="Order" ToRole="Clients" />
+    <NavigationProperty Name="Payment" Relationship="Self.FK__Order__PaymentID__5070F446" FromRole="Order" ToRole="Payments" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="PaymentID" />
+    </Key>
+    <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientID" Type="Int32" />
+    <Property Name="PaymentAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PaymentDate" Type="DateTime" Precision="0" />
+    <Property Name="PaymentMethod" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Payments__Client__4BAC3F29" FromRole="Payments" ToRole="Clients" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Order__PaymentID__5070F446" FromRole="Payments" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ProductDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ClientID" Type="Int32" />
+    <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ServiceID" Type="Int32" />
+    <Property Name="CategoriesID" Type="Int32" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="QuantityInStock" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Products__Catego__48CFD27E" FromRole="Products" ToRole="Categories" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Products__Client__47DBAE45" FromRole="Products" ToRole="Clients" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="ServiceID" />
+    </Key>
+    <Property Name="ServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ServiceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ServiceDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ServiceCharge" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <NavigationProperty Name="ClientServices" Relationship="Self.FK__ClientSer__Servi__440B1D61" FromRole="Services" ToRole="ClientServices" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__Servi__3E52440B" FromRole="Services" ToRole="Employees" />
+  </EntityType>
+  <Association Name="FK__Products__Catego__48CFD27E">
+    <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoriesID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="CategoriesID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientSer__Clien__4316F928">
+    <End Role="Clients" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="ClientServices" Type="Self.ClientService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="ClientServices">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__ClientID__5165187F">
+    <End Role="Clients" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Payments__Client__4BAC3F29">
+    <End Role="Clients" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Payments">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__Client__47DBAE45">
+    <End Role="Clients" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientSer__Emplo__44FF419A">
+    <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="ClientServices" Type="Self.ClientService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="ClientServices">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientSer__Servi__440B1D61">
+    <End Role="Services" Type="Self.Service" Multiplicity="0..1" />
+    <End Role="ClientServices" Type="Self.ClientService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="ServiceID" />
+      </Principal>
+      <Dependent Role="ClientServices">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employees__Depar__3D5E1FD2">
+    <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+    <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employees__Servi__3E52440B">
+    <End Role="Services" Type="Self.Service" Multiplicity="1" />
+    <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="ServiceID" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__PaymentID__5070F446">
+    <End Role="Payments" Type="Self.Payment" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payments">
+        <PropertyRef Name="PaymentID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="PaymentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Excell_On_ServiceEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CallLogs" EntityType="Self.CallLog" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Clients" EntityType="Self.Client" />
+    <EntitySet Name="ClientServices" EntityType="Self.ClientService" />
+    <EntitySet Name="Departments" EntityType="Self.Department" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="Payments" EntityType="Self.Payment" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Services" EntityType="Self.Service" />
+    <AssociationSet Name="FK__Products__Catego__48CFD27E" Association="Self.FK__Products__Catego__48CFD27E">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientSer__Clien__4316F928" Association="Self.FK__ClientSer__Clien__4316F928">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="ClientServices" EntitySet="ClientServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__ClientID__5165187F" Association="Self.FK__Order__ClientID__5165187F">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Payments__Client__4BAC3F29" Association="Self.FK__Payments__Client__4BAC3F29">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Payments" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__Client__47DBAE45" Association="Self.FK__Products__Client__47DBAE45">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientSer__Emplo__44FF419A" Association="Self.FK__ClientSer__Emplo__44FF419A">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="ClientServices" EntitySet="ClientServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientSer__Servi__440B1D61" Association="Self.FK__ClientSer__Servi__440B1D61">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="ClientServices" EntitySet="ClientServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employees__Depar__3D5E1FD2" Association="Self.FK__Employees__Depar__3D5E1FD2">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employees__Servi__3E52440B" Association="Self.FK__Employees__Servi__3E52440B">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__PaymentID__5070F446" Association="Self.FK__Order__PaymentID__5070F446">
+      <End Role="Payments" EntitySet="Payments" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

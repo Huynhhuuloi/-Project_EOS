@@ -1,0 +1,69 @@
+﻿@using System.Linq
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    List<Project_EOS.Models.Dao.DepartmentViewModel> departments = new List<Project_EOS.Models.Dao.DepartmentViewModel>();
+    ViewBag.Title = "Departments Management";
+    if (ViewBag.departments != null) { departments = ViewBag.departments; }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Department Management</title>
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/Content/style.css" />
+</head>
+<body>
+    <h1>Department Management</h1>
+    <div>
+        <button onclick="showCreateForm()">Add Department</button>
+    </div>
+
+    <!-- Form for creating new department -->
+    <div id="createForm" style="display: none;">
+        <h2>Create Department</h2>
+        <input type="text" id="createName" placeholder="Name" style="margin-bottom: 10px; width: 80%;"><br>
+        <textarea id="createDescription" placeholder="Description" style="margin-bottom: 10px; width: 80%; height: 100px;"></textarea><br>
+        <button onclick="saveNewDepartment()">Save</button>
+        <button onclick="cancelCreate()">Cancel</button>
+    </div>
+
+    <div>
+        <table class="table table-striped" width="700" border="1" id="numbered-table">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th class="name-column">Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.departments != null)
+                {
+                    foreach (var department in ViewBag.departments)
+                    {
+                        <tr>
+                            <td>@department.DepartmentID</td>
+                            <td><a href="@Url.Action("AllEmployeesByDepartment", "DepartmentManage", new { departmentID = department.DepartmentID, departmentName = department.DepartmentName })">@department.DepartmentName</a></td>
+
+                            <td>
+                                <span class="department-description">@department.DepartmentDescription</span>
+                                <input type="text" class="edit-department-description" value="@department.DepartmentDescription" style="display:none;">
+                            </td>
+                            <td>
+                                <button class="edit-button">Edit</button>
+                                <button class="update-button" style="display:none;" data-id="@department.DepartmentID">Update</button>
+                                <button class="cancel-button" style="display:none;">Cancel</button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/Areas/Admin/Scripts/Department.js"></script>
+</body>
+</html>

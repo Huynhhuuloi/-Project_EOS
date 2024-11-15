@@ -1,0 +1,92 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 400px;
+            margin-top: 100px;
+        }
+
+        .card {
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h3 class="text-center">Login Admin</h3>
+            <form id="loginForm" method="post" action="@Url.Action("Login", "Auth")">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter email" required>
+                    <div class="error" id="emailError">Please enter a valid email address.</div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                    <div class="error" id="passwordError">Please enter your password.</div>
+                </div>
+                <button type="submit" class="btn btn-custom btn-block">Login</button>
+                <p class="text-center mt-3">
+                    Don't have an account? <a href="/Auth/Register">Register here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        /*document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var valid = true;
+
+            // Email validation
+            var email = document.getElementById('username').value;
+            var emailError = document.getElementById('emailError');
+
+            if (!email) {
+                emailError.style.display = 'block';
+                valid = false;
+            } else {
+                emailError.style.display = 'none';
+            }
+
+            // Password validation
+            var password = document.getElementById('password').value;
+            var passwordError = document.getElementById('passwordError');
+
+            if (password === '') {
+                passwordError.style.display = 'block';
+                valid = false;
+            } else {
+                passwordError.style.display = 'none';
+            }
+
+
+        });*/
+    </script>
+</body>
+</html>

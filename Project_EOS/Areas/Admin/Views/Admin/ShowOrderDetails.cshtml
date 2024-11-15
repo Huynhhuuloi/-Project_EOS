@@ -1,0 +1,112 @@
+﻿@model List<Project_EOS.Models.Entities.Order>
+
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    List<Project_EOS.Models.Entities.Order> nv = new List<Project_EOS.Models.Entities.Order>();
+    if (ViewBag.order != null) { nv = ViewBag.order; }
+}
+
+
+<h2>ShowClientDetails</h2>"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng HTML với Input</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script>
+        function populateInputs(button) {
+            // Lấy dòng chứa nút bấm
+            var row = button.closest('tr');
+
+            // Lấy giá trị từ các ô trong dòng
+            var clientName = row.cells[1].innerText;
+            var productName = row.cells[2].innerText;
+            var serviceName = row.cells[3].innerText;
+            var total = row.cells[4].innerText;
+            var paymentName = row.cells[5].innerText;
+            var dateOrder = row.cells[6].innerText;
+
+            // Đưa giá trị vào các thẻ input
+            document.getElementById('clientName').value = clientName;
+            document.getElementById('productName').value = productName;
+            document.getElementById('serviceName').value = serviceName;
+            document.getElementById('total').value = total;
+            document.getElementById('paymentName').value = paymentName;
+            document.getElementById('dateOrder').value = dateOrder;
+        }
+
+    </script>
+    <style type='text/css'>
+            #numbered-table {
+                counter-reset: rowNumber; /* Reset counter for each table */
+            }
+
+                #numbered-table tbody tr {
+                    counter-increment: rowNumber; /* Increment counter for each row */
+                }
+
+                    #numbered-table tbody tr td:first-child::before {
+                        content: counter(rowNumber); /* Display row number */
+                        min-width: 1em; /* Ensure space for at least one digit */
+                        margin-right: 0.5em; /* Add some spacing between number and content */
+                    }
+        </style>
+</head>
+<body>
+    <table class="table table-striped" width="700" border="1" id="numbered-table">
+        <thead>
+            <tr>
+                <th>stt</th>
+                <th>Client Name</th>
+                <th>Product name</th>
+                <th>Service Name</th>
+                <th>Total</th>
+                <th>Payment Name</th>
+                <th>Date Order</th>
+                <th>Select</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dữ liệu từ backend sẽ được điền vào đây -->
+            @foreach (var item in nv)
+            {
+                <tr>
+                    <td></td>
+                    <td>@item.ClientID</td>
+                    <td>@item.ProductID</td>
+                    <td>@item.ServiceID</td>
+                    <td>@item.Total</td>
+                    <td>@item.PaymentID</td>
+                    <td>@item.DateOrder</td>
+                    <td><button onclick="populateInputs(this)">Select</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <br>
+
+    <label for="clientName">Client Name:</label>
+    <input type="text" id="clientName" name="clientName">
+    <br>
+    <label for="productName">Product Name:</label>
+    <input type="text" id="productName" name="productName">
+    <br>
+    <label for="serviceName">Service Name:</label>
+    <input type="text" id="serviceName" name="serviceName">
+    <br>
+    <label for="total">Total:</label>
+    <input type="text" id="total" name="total">
+    <br>
+    <label for="paymentName">Payment Name:</label>
+    <input type="text" id="paymentName" name="paymentName">
+    <br>
+    <label for="dateOrder">Date Order:</label>
+    <input type="text" id="dateOrder" name="dateOrder">
+
+    <script src="script.js"></script>
+</body>
+</html>

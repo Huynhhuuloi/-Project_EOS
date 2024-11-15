@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="56e336442f9d4289aa6914ecc2a58fd4" Name="Diagram1">
+        <EntityTypeShape EntityType="Excell_On_ServiceModel.CallLog" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Excell_On_ServiceModel.Category" Width="1.5" PointX="3.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Excell_On_ServiceModel.Client" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Excell_On_ServiceModel.ClientService" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Excell_On_ServiceModel.Department" Width="1.5" PointX="1.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Excell_On_ServiceModel.Employee" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Excell_On_ServiceModel.Order" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Excell_On_ServiceModel.Payment" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Excell_On_ServiceModel.Product" Width="1.5" PointX="6" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Excell_On_ServiceModel.Service" Width="1.5" PointX="1.5" PointY="17.25" IsExpanded="true" />
+        <AssociationConnector Association="Excell_On_ServiceModel.FK__Products__Catego__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="Excell_On_ServiceModel.FK__ClientSer__Clien__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="Excell_On_ServiceModel.FK__Order__ClientID__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="Excell_On_ServiceModel.FK__Payments__Client__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="Excell_On_ServiceModel.FK__Products__Client__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="Excell_On_ServiceModel.FK__ClientSer__Emplo__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="Excell_On_ServiceModel.FK__ClientSer__Servi__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="Excell_On_ServiceModel.FK__Employees__Depar__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="Excell_On_ServiceModel.FK__Employees__Servi__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="Excell_On_ServiceModel.FK__Order__PaymentID__5070F446" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

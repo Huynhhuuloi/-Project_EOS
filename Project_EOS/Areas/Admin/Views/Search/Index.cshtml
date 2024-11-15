@@ -1,0 +1,222 @@
+﻿@model Project_EOS.Models.Dao.SearchResultViewModel
+@{
+    ViewBag.Title = "Search Result";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/Areas/Admin/Content/style.css" />
+<style>
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .table-wrapper {
+        flex: 0 0 calc(33.33% - 20px); 
+        margin-right: 20px; 
+    }
+
+    .table {
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<h2>Search Result</h2>
+
+<div class="container">
+    <div class="table-wrapper">
+        <h3>Services</h3>
+        @if (Model.Services != null && Model.Services.Any())
+        {
+            <table class="table table-striped" id="numbered-table">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Service Name</th>
+                        <th>Service Description</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var service in Model.Services)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@service.ServiceName</td>
+                            <td>@service.ServiceDescription</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No services found.</p>
+        }
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="table-wrapper">
+        <h3>Employees</h3>
+        @if (Model.Employees != null && Model.Employees.Any())
+        {
+            <table class="table table-striped" id="numbered-table">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Employee Name</th>
+                        <th>Designation</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var employee in Model.Employees)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a href="@Url.Action("EmployeeDetail", "EmployeesManage", new { employeeID = employee.EmployeeID, employeeName = employee.EmployeeName })">
+                                    @employee.EmployeeName
+                                </a>
+                            </td>
+                            <td>@employee.Designation</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No services found.</p>
+        }
+    </div>
+</div>
+
+<div class="container">
+    <div class="table-wrapper">
+        <h3>Clients</h3>
+        @if (Model.Clients != null && Model.Clients.Any())
+        {
+            <table class="table table-striped" id="numbered-table">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Client Name</th>
+                        <th>Contact Person</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var client in Model.Clients)
+                    {
+                        <tr>
+                            <th></th>
+                            <td>@client.ClientName</td>
+                            <td>@client.ContactPerson</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No services found.</p>
+        }
+    </div>
+</div>
+
+<div class="container">
+    <div class="table-wrapper">
+        <h3>Departments</h3>
+        @if (Model.Departments != null && Model.Departments.Any())
+        {
+            <table class="table table-striped" id="numbered-table">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Department Name</th>
+                        <th>Description</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var department in Model.Departments)
+                    {
+                        <tr>
+                            <th></th>
+                            <td>@department.DepartmentName</td>
+                            <td>@department.DepartmentDescription</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No services found.</p>
+        }
+    </div>
+</div>
+
+<div class="container">
+    <div class="table-wrapper">
+        <h3>Products</h3>
+        @if (Model.Products != null && Model.Products.Any())
+        {
+            <table class="table table-striped" id="numbered-table">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Product Name</th>
+                        <th>Description</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model.Products)
+                    {
+                        <tr>
+                            <th></th>
+                            <td>@product.ProductName</td>
+                            <td>@product.ProductDescription</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No services found.</p>
+        }
+    </div>
+</div>
+
+@if (Model.Services != null && !Model.Services.Any() &&
+    Model.Employees != null && !Model.Employees.Any() &&
+    Model.Clients != null && !Model.Clients.Any() &&
+    Model.Departments != null && !Model.Departments.Any() &&
+    Model.Products != null && !Model.Products.Any())
+{
+    <p>No results found.</p>
+}

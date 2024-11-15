@@ -1,0 +1,61 @@
+﻿@using System.Linq
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    List<Project_EOS.Models.Dao.PaymentViewModel> payments = new List<Project_EOS.Models.Dao.PaymentViewModel>();
+    ViewBag.Title = "Payments";
+    if (ViewBag.payments != null) { payments = ViewBag.payments; }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/Content/style.css" />
+</head>
+<body>
+    <div>
+        <table class="table table-striped" id="numbered-table">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th class="name-column">Client</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Method</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.payments != null)
+                {
+                    foreach (var payment in ViewBag.payments)
+                    {
+                        <tr>
+                            <td></td>
+                            <td><a href="@Url.Action("PaymentsByClient", "PaymentManage", new { clientID = payment.ClientID, clientName = payment.ClientName })">@payment.ClientName</a></td>
+                            <td>@payment.PaymentAmount</td>
+                            <td>
+                                <span class="payment-date">@payment.PaymentDate.ToString("yyyy-MM-dd")</span>
+                                <input type="date" class="edit-payment-date" value="@payment.PaymentDate.ToString("yyyy-MM-dd")" style="display:none;">
+                            </td>
+                            <td>
+                                <span class="payment-method">@payment.PaymentMethod</span>
+                                <input type="text" class="edit-payment-method" value="@payment.PaymentMethod" style="display:none;">
+                            </td>
+                            <td>
+                                <button class="edit-button">Edit</button>
+                                <button class="update-button" style="display:none;" data-id="@payment.PaymentID">Update</button>
+                                <button class="cancel-button" style="display:none;">Cancel</button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/Areas/Admin/Scripts/Payment.js"></script>
+</body>
+</html>

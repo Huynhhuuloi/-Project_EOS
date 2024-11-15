@@ -1,0 +1,50 @@
+﻿@using System.Linq
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    List<Project_EOS.Models.Dao.DepartmentViewModel> employees = new List<Project_EOS.Models.Dao.DepartmentViewModel>();
+    ViewBag.Title = "All Employees By Department";
+    if (ViewBag.employees != null) { employees = ViewBag.employees; }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>All Employees By Department</title>
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/Content/style.css" />
+
+</head>
+<body>
+    <h3><strong>Total employees in @ViewBag.DepartmentName: @ViewBag.totalEmployees</strong></h3>
+
+
+    <div>
+        <table class="table table-striped" id="numbered-table">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Employee Name</th>
+                    <th>Active</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (ViewBag.employees != null)
+                {
+                    foreach (var employee in ViewBag.employees)
+                    {
+                        <tr>
+                            <td>@employee.EmployeeID</td> <!-- Thêm giá trị vào cột đầu tiên, giả sử EmployeeID là một thuộc tính của employee -->
+                            <td>@employee.EmployeeName</td>
+                            <td><input type="checkbox" @(employee.Is_Active ? "checked" : "") disabled></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+</body>
+</html>

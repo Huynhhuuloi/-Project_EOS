@@ -1,0 +1,50 @@
+﻿@using System.Linq
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    List<Project_EOS.Models.Dao.PaymentViewModel> payments = new List<Project_EOS.Models.Dao.PaymentViewModel>();
+    ViewBag.Title = "Payments";
+    if (ViewBag.payments != null) { payments = ViewBag.payments; }
+    decimal totalPaymentAmount = payments.Sum(p => p.PaymentAmount ?? 0);
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>
+        All Payments
+    </title>
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/Content/style.css" />
+</head>
+<body>
+    <h2>All Payments for @ViewBag.ClientName</h2>
+    <h3><strong>Total: @totalPaymentAmount</strong></h3>
+    <table class="table table-striped" id="numbered-table">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Method</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (ViewBag.payments != null)
+            {
+                foreach (var payment in ViewBag.payments)
+                {
+                    <tr>
+                        <td></td>
+                        <td>@payment.PaymentAmount</td>
+                        @*<td>@payment.PaymentDate</td>*@
+                        <td>@payment.PaymentDate.ToString("dd/MM/yyyy")</td>
+                        <td>@payment.PaymentMethod</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Project_EOS.Models.Dao.EmployeeViewModel>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    List<Project_EOS.Models.Dao.EmployeeViewModel> employees = ViewBag.employees as List<Project_EOS.Models.Dao.EmployeeViewModel>;
+    ViewBag.Title = "Employees";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/Content/style.css" />
+
+</head>
+<body>
+
+    <div>
+        <!-- Button to toggle form visibility -->
+        <button id="showFormBtn" onclick="showCreateForm()">Add Employee</button>
+        <!-- Add Employee Form -->
+        <form id="addEmployeeForm" class="hidden">
+            <div>
+                <label for="EmployeeName">Employee Name</label>
+                <input type="text" id="createEmployeeName" name="EmployeeName" placeholder="Employee Name" required />
+            </div>
+            <div>
+                <label for="DepartmentID">Department</label>
+                @Html.DropDownList("DepartmentID", ViewBag.Departments as SelectList, "Select Department", new { @id = "createDepartmentName", @class = "form-control", required = "required" })
+            </div>
+            <div>
+                <label for="ServiceID">Service</label>
+                @Html.DropDownList("ServiceID", ViewBag.Services as SelectList, "Select Service", new { @id = "createServiceName", @class = "form-control", required = "required" })
+            </div>
+
+            <div>
+                <label for="Designation">Designation</label>
+                <input type="text" id="createDesignation" name="Designation" placeholder="Designation" required />
+            </div>
+            <div>
+                <label for="Email">Email</label>
+                <input type="email" id="createEmail" name="Email" placeholder="Email" required />
+            </div>
+            <div>
+                <label for="Salary">Salary</label>
+                <input type="number" id="createSalary" name="Salary" placeholder="Salary" required />
+            </div>
+            <div>
+                <label for="JoinDate">Join Date</label>
+                <!-- Giá trị mặc định cho JoinDate được thiết lập ở phía Controller -->
+                <input type="date" id="createJoinDate" name="JoinDate" required />
+            </div>
+
+            <input type="hidden" name="Is_Active" value="false" id="createActive" />
+
+            <button type="button" onclick="saveNewEmployee()">Submit</button>
+
+            <button type="button" id="cancelBtn" onclick="cancelCreate()">Cancel</button>
+        </form>
+    </div>
+
+
+    <h2>Employees</h2>
+
+    <table class="table table-striped" id="numbered-table">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th class="name-column">Name</th>
+                <th>Department</th>
+                <th>Service</th>
+                <th>Designation</th>
+                @*<th>Email</th>
+                    <th>Salary</th>
+                    <th>Join Date</th>*@
+                <th>Active</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in employees)
+            {
+                <tr>
+                    <td></td>
+                    <td>
+                        <a href="@Url.Action("EmployeeDetail", "EmployeesManage", new { employeeID = employee.EmployeeID, employeeName = employee.EmployeeName })">
+                            @employee.EmployeeName
+                        </a>
+                    </td>
+                    <td>@employee.DepartmentName</td>
+                    <td>@employee.ServiceName</td>
+                    <td>@employee.Designation</td>
+                    @*<td>@employee.Email</td>
+                        <td>@employee.Salary</td>
+                        <td>@employee.JoinDate.ToString("yyyy-MM-dd")</td>*@
+                    <td class="custom-checkbox"><input type="checkbox" @(employee.Is_Active.HasValue && employee.Is_Active.Value ? "checked" : "") disabled></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/Areas/Admin/Scripts/Employee.js"></script>
+
+
+</body>
+</html>
